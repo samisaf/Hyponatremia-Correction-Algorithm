@@ -314,14 +314,14 @@
 
     /* ── grid ── */
     .grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
+      display: flex;
       gap: 12px;
+      align-items: flex-start;
     }
 
     @media (max-width: 480px) {
       .grid {
-        grid-template-columns: 1fr;
+        flex-wrap: wrap;
       }
     }
 
@@ -330,10 +330,18 @@
       display: flex;
       flex-direction: column;
       gap: 5px;
+      flex: 1;
+      min-width: 0;
     }
 
     .field--wide {
-      grid-column: 1 / -1;
+      flex: 2;
+    }
+
+    @media (max-width: 480px) {
+      .field, .field--wide {
+        flex: 1 1 100%;
+      }
     }
 
     .field__label {
@@ -364,7 +372,8 @@
     /* ── inputs ── */
     .input {
       width: 100%;
-      padding: 8px 10px;
+      height: 36px;
+      padding: 0 10px;
       border: 1px solid var(--border);
       border-radius: 6px;
       font-size: 0.875rem;
@@ -748,7 +757,7 @@
                 <${Field} label="Target Serum [Na]" unit="mEq/L">
                   <${Num} val=${NaEnd} set=${setNaEnd} placeholder="130" />
                 <//>
-              ` : html`<div />`}
+              ` : null}
 
               <div class="field field--wide">
                 <span class="field__label">Total Body Water (TBW)</span>
@@ -813,7 +822,7 @@
                 <${Field} label="IVF Rate" unit="mL/hr">
                   <${Num} val=${IVFRmL} set=${setIVFRmL} placeholder="50" />
                 <//>
-              ` : html`<div />`}
+              ` : null}
 
               <${Field} label="Duration" unit="hours">
                 <${Num} val=${timeh} set=${setTimeh} placeholder="24" />
@@ -831,7 +840,6 @@
                 <${Num} val=${URmL} set=${setURmL} placeholder="50" />
               <//>
 
-              <div />
 
               <${Field} label="Urine [Na]" unit="mEq/L">
                 <${Num} val=${UNa} set=${setUNa} placeholder="80" />
